@@ -1,6 +1,8 @@
 package norollback;
 
+import rife.bld.BuildCommand;
 import rife.bld.Project;
+import rife.bld.extension.JacocoReportOperation;
 
 import java.util.List;
 
@@ -31,6 +33,7 @@ public class NoRollbackBuild extends Project {
                 .include(dependency("org.testcontainers:postgresql:1.20.0"));
 
         scope(runtime)
+                .include(dependency("com.h2database:h2:2.3.230"))
                 .include(dependency("com.ibm.db2:jcc:11.5.9.0"))
                 .include(dependency("com.microsoft.sqlserver:mssql-jdbc:12.6.3.jre11"))
                 .include(dependency("com.mysql:mysql-connector-j:9.0.0"))
@@ -40,5 +43,12 @@ public class NoRollbackBuild extends Project {
 
     public static void main(String[] args) {
         new NoRollbackBuild().start(args);
+    }
+
+    @BuildCommand(summary = "Generates Jacoco Reports")
+    public void jacoco() throws Exception {
+        new JacocoReportOperation()
+                .fromProject(this)
+                .execute();
     }
 }

@@ -1,7 +1,5 @@
 package norollback;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -9,8 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * NoRollbackFromHere
@@ -19,9 +17,9 @@ import java.util.List;
 public class NoRollbackFromHere {
 
     private final Class<?> loader;
-    private final List<String> donePrevious = new ArrayList<>();
-    private final List<String> success = new ArrayList<>();
-    private final List<String> failed = new ArrayList<>();
+    private final Map<String, Object> donePrevious = new HashMap<>();
+    private final Map<String, Object> success = new HashMap<>();
+    private final Map<String, Object> failed = new HashMap<>();
 
     /**
      * Create an instance of the migration engine
@@ -81,8 +79,8 @@ public class NoRollbackFromHere {
                     // load resource
                     URL url = loader.getResource(resource);
                     if (url == null) {
-                        failed.add(resource);
-                        throw new RuntimeException("null resource: " + resource);
+                        failed.put(resource, "Resource not found");
+                        continue;
                     }
 
                     // check if it's already applied
@@ -94,14 +92,14 @@ public class NoRollbackFromHere {
                     count.setString(1, resource);
                     ResultSet resultSet = count.executeQuery();
                     if (resultSet.next() && resultSet.getInt(1) == 1) {
-                        donePrevious.add(resource);
+                        donePrevious.put(resource, "Already applied");
                         continue;
                     }
 
                     // apply if not
                     String migrationData = Files.readString(Paths.get(url.toURI()));
                     con.createStatement().execute(migrationData);
-                    success.add(resource);
+                    success.put(resource, "Applied successfully");
 
                     // save in the changelog
                     PreparedStatement save = con.prepareStatement("""
@@ -109,9 +107,8 @@ public class NoRollbackFromHere {
                             """);
                     save.setString(1, resource);
                     save.executeUpdate();
-                } catch (IOException | URISyntaxException e) {
-                    failed.add(resource);
-                    throw new RuntimeException(e);
+                } catch (Exception e) {
+                    failed.put(resource, e);
                 }
             }
         } finally {
@@ -122,15 +119,15 @@ public class NoRollbackFromHere {
         }
     }
 
-    public List<String> getDonePrevious() {
+    public Map<String, Object> getDonePrevious() {
         return donePrevious;
     }
 
-    public List<String> getSuccess() {
+    public Map<String, Object> getSuccess() {
         return success;
     }
 
-    public List<String> getFailed() {
+    public Map<String, Object> getFailed() {
         return failed;
     }
 }
