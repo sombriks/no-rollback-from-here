@@ -7,7 +7,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 // https://java.testcontainers.org/modules/databases/jdbc/
 public class NoRollbackTest {
@@ -16,6 +16,14 @@ public class NoRollbackTest {
     @Disabled
     void shouldMigrateDB2() throws Exception {
         try (Connection con = DriverManager.getConnection("jdbc:tc:db2:11.5.0.0a///no_rollback")) {
+            shouldMigrate(con);
+        }
+    }
+
+    @Test
+    @Disabled
+    void shouldMigrateMSSQLServer() throws Exception {
+        try (Connection con = DriverManager.getConnection("jdbc:tc:sqlserver:2017-CU12:///no_rollback")) {
             shouldMigrate(con);
         }
     }
@@ -44,18 +52,24 @@ public class NoRollbackTest {
 
     private void shouldMigrate(Connection con) throws SQLException, InterruptedException {
         NoRollbackFromHere noRollback = new NoRollbackFromHere(getClass());
-        noRollback.migrate(con,"/test1.sql");
+        noRollback.migrate(con, "/test1.sql");
         assertEquals(0, noRollback.getFailed().size());
         assertEquals(1, noRollback.getSuccess().size());
         assertEquals(0, noRollback.getDonePrevious().size());
 
         int result = con.createStatement().executeUpdate("""
-            insert into xpto(id) values(1),(2),(3)
-            """);
+                insert into xpto(id) values(1),(2),(3)
+                """);
         assertEquals(3, result);
     }
 
-    public void shouldNotRunSameResourceTwice()  {
-
+    @Test
+    public void shouldNotRunSameResourceTwice() throws Exception {
+        try (Connection con = DriverManager.getConnection("jdbc:tc:postgresql:9.6.8:///no_rollback")) {
+            NoRollbackFromHere noRollback = new NoRollbackFromHere(getClass());
+            noRollback.migrate(con, "/test1.sql", "/test1.sql");
+            assertEquals(1, noRollback.getSuccess().size());
+            assertEquals(1, noRollback.getDonePrevious().size());
+        }
     }
 }

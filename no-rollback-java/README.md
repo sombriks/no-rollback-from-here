@@ -38,7 +38,7 @@ See [tests][tests] for more
 - [ ] tests and coverage
 - [ ] set up library at github registry
 - [ ] set up library at nexus sonatype registry
-- [ ] postgresql suport
+- [ ] postgresql support
 - [ ] mysql support
 - [ ] oracle support
 - [ ] db2 support
@@ -46,6 +46,6 @@ See [tests][tests] for more
 
 ## Contributing
 
-Fork and open PRs, willing to receive them :sunglasses: 
+Fork and open PRs, willing to receive them :sunglasses:
 
 [tests]: ./src/test/java/norollback/NoRollbackTest.java

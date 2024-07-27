@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/no-rollback-java/src/bld/bld.iml" filepath="$PROJECT_DIR$/no-rollback-java/src/bld/bld.iml" />
       <module fileurl="file://$PROJECT_DIR$/no-rollback-java/src/main/main.iml" filepath="$PROJECT_DIR$/no-rollback-java/src/main/main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/no-rollback-java.iml" filepath="$PROJECT_DIR$/.idea/no-rollback-java.iml" />
       <module fileurl="file://$PROJECT_DIR$/no-rollback-java/src/test/test.iml" filepath="$PROJECT_DIR$/no-rollback-java/src/test/test.iml" />

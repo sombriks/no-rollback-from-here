@@ -86,13 +86,13 @@ public class NoRollbackFromHere {
                     }
 
                     // check if it's already applied
-                    PreparedStatement prepared = con.prepareStatement("""
+                    PreparedStatement count = con.prepareStatement("""
                             select count(no_rollback_resource) 
                             from no_rollback_from_here
                             where no_rollback_resource = ?
                             """);
-                    prepared.setString(1, resource);
-                    ResultSet resultSet = prepared.executeQuery();
+                    count.setString(1, resource);
+                    ResultSet resultSet = count.executeQuery();
                     if (resultSet.next() && resultSet.getInt(1) == 1) {
                         donePrevious.add(resource);
                         continue;
@@ -102,6 +102,13 @@ public class NoRollbackFromHere {
                     String migrationData = Files.readString(Paths.get(url.toURI()));
                     con.createStatement().execute(migrationData);
                     success.add(resource);
+
+                    // save in the changelog
+                    PreparedStatement save = con.prepareStatement("""
+                            insert into no_rollback_from_here (no_rollback_resource) values (?)
+                            """);
+                    save.setString(1, resource);
+                    save.executeUpdate();
                 } catch (IOException | URISyntaxException e) {
                     failed.add(resource);
                     throw new RuntimeException(e);

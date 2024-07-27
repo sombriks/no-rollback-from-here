@@ -2,7 +2,7 @@
 ---
 services:
   db2:
-    image: icr.io/db2_community/db2:11.5.8.0
+    image: ibmcom/db2:11.5.0.0a
     privileged: true
     environment:
       LICENSE: accept
@@ -11,6 +11,13 @@ services:
       DB2INST1_PASSWORD: change-me-please
     ports:
       - "50000:50000"
+
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: Y
+      MSSQL_SA_PASSWORD: mssql
+
 
   mysql:
     image: mysql:9.0.1-oraclelinux9

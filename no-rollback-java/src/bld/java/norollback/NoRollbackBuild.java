@@ -25,11 +25,14 @@ public class NoRollbackBuild extends Project {
                 .include(dependency("org.junit.platform:junit-platform-console-standalone:1.10.2"))
                 .include(dependency("org.testcontainers:testcontainers:1.20.0"))
                 .include(dependency("org.testcontainers:db2:1.20.0"))
+                .include(dependency("org.testcontainers:mssqlserver:1.20.0"))
                 .include(dependency("org.testcontainers:mysql:1.20.0"))
                 .include(dependency("org.testcontainers:oracle-free:1.20.0"))
                 .include(dependency("org.testcontainers:postgresql:1.20.0"));
+
         scope(runtime)
                 .include(dependency("com.ibm.db2:jcc:11.5.9.0"))
+                .include(dependency("com.microsoft.sqlserver:mssql-jdbc:12.6.3.jre11"))
                 .include(dependency("com.mysql:mysql-connector-j:9.0.0"))
                 .include(dependency("com.oracle.database.jdbc:ojdbc11:23.4.0.24.05"))
                 .include(dependency("org.postgresql:postgresql:42.7.3"));
