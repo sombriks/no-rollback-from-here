@@ -30,3 +30,4 @@ jobs:
         with:
           name: coverage.zip
           path: no-rollback-java/build/reports/jacoco
+      - run: cat build/reports/jacoco/test/jacocoTestReport.csv
