@@ -1,0 +1,26 @@
+# run tests so we can trust the code
+---
+name: Java CI
+on:
+  push:
+    branches: [*]
+jobs:
+  test:
+    defaults:
+      run:
+        working-directory: no-rollback-java
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      - id: cache
+        uses: actions/cache@v4
+        with:
+          path: lib
+          key: bld-${{ hashFiles('no-rollback-java/src/bld/java/**') }}
+      - if: steps.cache.outputs.cache-hit != 'true'
+        run: ./bld clean purge download
+      - run: ./bld compile test
