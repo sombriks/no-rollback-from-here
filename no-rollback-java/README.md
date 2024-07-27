@@ -1,5 +1,7 @@
 # no-rollback-java
 
+[![Java CI](https://github.com/sombriks/no-rollback-from-here/actions/workflows/java.yml/badge.svg)](https://github.com/sombriks/no-rollback-from-here/actions/workflows/java.yml)
+
 Simple, trimmed, java library for database migrations. It's up to you to do most
 of the job.
 
