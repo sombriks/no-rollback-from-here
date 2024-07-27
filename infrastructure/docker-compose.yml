@@ -1,0 +1,39 @@
+# misc helpers
+---
+services:
+  db2:
+    image: icr.io/db2_community/db2:11.5.8.0
+    privileged: true
+    environment:
+      LICENSE: accept
+      DBNAME: no_rollback
+      DB2INSTANCE: db2inst1
+      DB2INST1_PASSWORD: change-me-please
+    ports:
+      - "50000:50000"
+
+  mysql:
+    image: mysql:9.0.1-oraclelinux9
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: no_rollback
+    ports:
+      - "3306:3306"
+
+  oracle:
+    image: gvenzl/oracle-free:23.4-slim
+    environment:
+      # user system
+      ORACLE_DATABASE: no_rollback
+      ORACLE_PASSWORD: oracle
+    ports:
+      - "1521:1521"
+
+  postgres:
+    image: postgres:16-alpine3.20
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-no_rollback}
+    ports:
+      - "5432:5432"
