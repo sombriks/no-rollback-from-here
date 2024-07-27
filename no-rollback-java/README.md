@@ -56,7 +56,7 @@ See [tests][tests] for more
 
 ## Roadmap
 
-- [ ] tests and coverage
+- [X] tests and coverage
 - [ ] set up library at github registry
 - [ ] set up library at nexus sonatype registry
 - [ ] postgresql support
