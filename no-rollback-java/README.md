@@ -36,11 +36,11 @@ Gradle/others:
 
 ```java
 // ...
-    NoRollbackFromHere noRollback = new NoRollbackFromHere(getClass());
-    noRollback.migrate(con,"/test1.sql");
-    assertEquals(0, noRollback.getFailed().size());
-    assertEquals(1, noRollback.getSuccess().size());
-    assertEquals(0, noRollback.getDonePrevious().size());
+        NoRollbackFromHere noRollback = new NoRollbackFromHere(getClass());
+        noRollback.migrate(con,"/test1.sql");
+        assertEquals(0, noRollback.getFailed().size());
+        assertEquals(1, noRollback.getSuccess().size());
+        assertEquals(0, noRollback.getDonePrevious().size());
 // ...
 ```
 
