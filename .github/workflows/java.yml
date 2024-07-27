@@ -20,8 +20,8 @@ jobs:
       - id: cache
         uses: actions/cache@v4
         with:
-          path: lib
-          key: bld-${{ hashFiles('no-rollback-java/src/bld/java/**') }}
+          path: no-rollback-java
+          key: bld-${{ hashFiles('src/bld/java/**') }}
       - if: steps.cache.outputs.cache-hit != 'true'
         run: ./bld clean purge download
       - run: ./bld compile test
