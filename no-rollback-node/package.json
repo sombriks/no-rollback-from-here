@@ -1,0 +1,19 @@
+{
+  "name": "no-rollback-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava lib"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "ava": "^6.1.3",
+    "mysql2": "^3.11.0",
+    "pg": "^8.12.0",
+    "sqlite3": "^5.1.7",
+    "testcontainers": "^10.10.4"
+  }
+}
