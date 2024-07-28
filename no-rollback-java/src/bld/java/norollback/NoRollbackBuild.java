@@ -43,7 +43,9 @@ public class NoRollbackBuild extends Project {
                 .include(dependency("com.oracle.database.jdbc:ojdbc11:23.4.0.24.05"))
                 .include(dependency("org.postgresql:postgresql:42.7.3"));
 
-        publishOperation().repository(new Repository(
+        publishOperation()
+                .fromProject(this)
+                .repository(new Repository(
                 "https://maven.pkg.github.com/sombriks/no-rollback-from-here",
                 System.getenv("GITHUB_ACTOR"),
                 System.getenv("GITHUB_TOKEN")
