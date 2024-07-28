@@ -45,8 +45,10 @@ public class NoRollbackBuild extends Project {
 
         publishOperation()
                 .repository(new Repository(
-                        "https://maven.pkg.github.com/sombriks/no-rollback-from-here/"
-                ).withCredentials(System.getenv("GITHUB_ACTOR"), System.getenv("GITHUB_TOKEN")));
+                        "https://maven.pkg.github.com/sombriks/no-rollback-from-here/",
+                            System.getenv("GITHUB_ACTOR"),
+                            System.getenv("GITHUB_TOKEN")
+                ));
     }
 
     public static void main(String[] args) {
@@ -55,8 +57,6 @@ public class NoRollbackBuild extends Project {
 
     @BuildCommand(summary = "Generates Jacoco Reports")
     public void jacoco() throws Exception {
-        new JacocoReportOperation()
-                .fromProject(this)
-                .execute();
+        new JacocoReportOperation().fromProject(this).execute();
     }
 }

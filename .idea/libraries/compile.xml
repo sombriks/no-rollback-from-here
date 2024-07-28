@@ -1,17 +1,16 @@
 <component name="libraryTable">
-  <library name="test">
+  <library name="compile">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/no-rollback-java/lib/test" />
+      <root url="file://$PROJECT_DIR$/no-rollback-java/lib/compile" />
       <root url="file://$PROJECT_DIR$/no-rollback-java/lib/provided" />
-      <root url="file://$PROJECT_DIR$/no-rollback-java/src/test/resources" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="file://$PROJECT_DIR$/no-rollback-java/lib/test" />
+      <root url="file://$PROJECT_DIR$/no-rollback-java/lib/compile" />
       <root url="file://$PROJECT_DIR$/no-rollback-java/lib/provided" />
     </SOURCES>
-    <jarDirectory url="file://$PROJECT_DIR$/no-rollback-java/lib/test" recursive="false" />
-    <jarDirectory url="file://$PROJECT_DIR$/no-rollback-java/lib/test" recursive="false" type="SOURCES" />
+    <jarDirectory url="file://$PROJECT_DIR$/no-rollback-java/lib/compile" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/no-rollback-java/lib/compile" recursive="false" type="SOURCES" />
     <jarDirectory url="file://$PROJECT_DIR$/no-rollback-java/lib/provided" recursive="false" />
     <jarDirectory url="file://$PROJECT_DIR$/no-rollback-java/lib/provided" recursive="false" type="SOURCES" />
   </library>

@@ -13,20 +13,37 @@ of the job.
 
 This come out of the box:
 
-- Changelog table
-- Lock table (avoid concurrent migrators)
-- Native SQL migrations expected
+- Changelog table.
+- Lock table (avoid concurrent migrators).
+- Native SQL migrations expected.
 
 This is your problem to deal with:
 
-- Some up/down strategy
-- From where to get the migrations
-- Check for contexts, environment variables or something to decide to run or not
-- Run specially tailored scripts for a specific database engine
+- Some up/down strategy.
+- From where to get the migrations.
+- Check for contexts, environment variables or something to help decide to run
+  or not a migration file.
+- Run specially tailored scripts for a specific database engine.
 
 But boy it's fast!
 
 ## Installing
+
+Bld:
+
+Add the github maven registry configuration:
+
+     repositories = List.of(MAVEN_CENTRAL, RIFE2_RELEASES,
+            new Repository("https://maven.pkg.github.com/sombriks/*",
+                    System.getenv("GITHUB_ACTOR"),
+                    System.getenv("GITHUB_TOKEN")
+            )
+     );
+
+Then the dependency:
+
+     scope(compile)
+        .include(dependency("norollback:norollback:0.1.0"))
 
 Maven:
 
@@ -48,9 +65,7 @@ Gradle/others:
 // ...
 ```
 
-_TODO_ add more examples of the expected usage of it
-
-See [tests][tests] for more
+See [tests][tests] and [example project][example] for more examples.
 
 ## Noteworthy
 
@@ -61,10 +76,11 @@ See [tests][tests] for more
 ## Roadmap
 
 - [X] tests and coverage
-- [ ] set up library at github registry
+- [X] set up library at github registry
 - [ ] set up library at nexus sonatype registry
-- [ ] postgresql support
-- [ ] mysql support
+- [X] postgresql support
+- [X] mysql support
+- [X] h2 support
 - [ ] oracle support
 - [ ] db2 support
 - [ ] sql server support
@@ -74,3 +90,4 @@ See [tests][tests] for more
 Fork and open PRs, willing to receive them :sunglasses:
 
 [tests]: ./src/test/java/norollback/NoRollbackTest.java
+[example]: ../examples/mytodolist/README.md
