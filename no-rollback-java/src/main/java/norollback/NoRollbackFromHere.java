@@ -85,7 +85,7 @@ public class NoRollbackFromHere {
 
                     // check if it's already applied
                     PreparedStatement count = con.prepareStatement("""
-                            select count(no_rollback_resource) 
+                            select count(no_rollback_resource)
                             from no_rollback_from_here
                             where no_rollback_resource = ?
                             """);

@@ -1,0 +1,23 @@
+<component name="libraryTable">
+  <library name="runtime">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/runtime/checker-qual-3.42.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/runtime/h2-2.3.230.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/runtime/jcc-11.5.9.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/runtime/mssql-jdbc-12.6.3.jre11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/runtime/mysql-connector-j-9.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/runtime/ojdbc11-23.4.0.24.05.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/runtime/postgresql-42.7.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/runtime/protobuf-java-4.26.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/runtime/checker-qual-3.42.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/runtime/h2-2.3.230-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/runtime/mssql-jdbc-12.6.3.jre11-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/runtime/mysql-connector-j-9.0.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/runtime/postgresql-42.7.3-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/runtime/protobuf-java-4.26.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,32 @@
+<component name="libraryTable">
+  <library name="bld">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/no-rollback-java/lib/bld/args4j-2.0.28.jar!/" />
+      <root url="jar://$PROJECT_DIR$/no-rollback-java/lib/bld/asm-9.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/no-rollback-java/lib/bld/asm-commons-9.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/no-rollback-java/lib/bld/asm-tree-9.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/no-rollback-java/lib/bld/bld-jacoco-report-0.9.7-20240723.004725-1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/no-rollback-java/lib/bld/bld-wrapper.jar!/" />
+      <root url="jar://$PROJECT_DIR$/no-rollback-java/lib/bld/org.jacoco.agent-0.8.12-runtime.jar!/" />
+      <root url="jar://$PROJECT_DIR$/no-rollback-java/lib/bld/org.jacoco.agent-0.8.12.jar!/" />
+      <root url="jar://$PROJECT_DIR$/no-rollback-java/lib/bld/org.jacoco.ant-0.8.12-nodeps.jar!/" />
+      <root url="jar://$PROJECT_DIR$/no-rollback-java/lib/bld/org.jacoco.ant-0.8.12.jar!/" />
+      <root url="jar://$PROJECT_DIR$/no-rollback-java/lib/bld/org.jacoco.cli-0.8.12-nodeps.jar!/" />
+      <root url="jar://$PROJECT_DIR$/no-rollback-java/lib/bld/org.jacoco.core-0.8.12.jar!/" />
+      <root url="jar://$PROJECT_DIR$/no-rollback-java/lib/bld/org.jacoco.report-0.8.12.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/no-rollback-java/lib/bld/args4j-2.0.28-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/no-rollback-java/lib/bld/asm-9.7-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/no-rollback-java/lib/bld/asm-commons-9.7-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/no-rollback-java/lib/bld/asm-tree-9.7-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/no-rollback-java/lib/bld/bld-jacoco-report-0.9.7-20240723.004725-1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/no-rollback-java/lib/bld/org.jacoco.agent-0.8.12-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/no-rollback-java/lib/bld/org.jacoco.ant-0.8.12-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/no-rollback-java/lib/bld/org.jacoco.cli-0.8.12-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/no-rollback-java/lib/bld/org.jacoco.core-0.8.12-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/no-rollback-java/lib/bld/org.jacoco.report-0.8.12-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
