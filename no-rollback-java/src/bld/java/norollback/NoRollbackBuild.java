@@ -46,7 +46,7 @@ public class NoRollbackBuild extends Project {
         publishOperation()
                 .fromProject(this)
                 .repository(new Repository(
-                "https://maven.pkg.github.com/sombriks/no-rollback-from-here",
+                "https://maven.pkg.github.com/sombriks/no-rollback-from-here/",
                 System.getenv("GITHUB_ACTOR"),
                 System.getenv("GITHUB_TOKEN")
         ));
