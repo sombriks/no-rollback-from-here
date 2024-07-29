@@ -54,7 +54,8 @@ export const NoRollback = (con) => {
               `, [changeset])
               success[changeset] = "success"
             } else {
-              donePrevious[changeset] = "already ran"
+              const [{created}] = skip.rows
+              donePrevious[changeset] = `already ran at ${created}`
             }
           } catch (e) {
             failed[changeset] = e

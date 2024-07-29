@@ -2,15 +2,14 @@
 import test from 'ava';
 import {NoRollback} from "../lib/no-rollback.js";
 import {PGlite} from "@electric-sql/pglite";
+import {default as sqlite3} from 'sqlite3';
 
 test.before(async (t) => {})
 
 test.after.always(async (t) => {})
 
-test('should run on PGLite', async t => {
-
+const happyPath = async (t, connection) => {
   // given
-  const connection = new PGlite('memory://test-pgdata', {debug: 0});
   const changesets = [
     "test/fixtures/01-happy-path/init.sql"
   ]
@@ -18,6 +17,8 @@ test('should run on PGLite', async t => {
   // when
   const migrator = NoRollback(connection)
   await migrator.migrate(changesets)
+
+  console.log(migrator)
 
   // then
   t.truthy(Object.keys(migrator.success).length)
@@ -35,8 +36,14 @@ test('should run on PGLite', async t => {
   t.truthy(result.rows.length)
   const [{id}] = result.rows
   t.truthy(id)
+}
+
+test('should run on PGLite', async t => {
+  const connection = new PGlite('memory://test-pgdata', {debug: 0});
+  await happyPath(t, connection)
 })
 
-test.skip('should run on SQLite', async t => {
-
+test('should run on SQLite', async t => {
+  const connection = new sqlite3.Database('memory')
+  await happyPath(t, connection)
 })
