@@ -6,7 +6,9 @@ declare namespace NoRollbackNode {
     }
 
     type NoRollbackConfig = {
-        results: Record<string, any>
+        donePrevious: Record<string, any>
+        success: Record<string, any>
+        failed: Record<string, any>
         migrate: (changesets: string[]) => Promise<void>
     }
 
