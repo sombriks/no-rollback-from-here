@@ -1,16 +1,19 @@
 {
   "name": "no-rollback-node",
-  "version": "1.0.0",
-  "description": "",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "Simple, trimmed, node library for database migrations",
   "main": "index.js",
   "scripts": {
-    "test": "ava lib"
+    "test": "ava",
+    "test:coverage": "c8 ava"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "ava": "^6.1.3",
+    "c8": "^10.1.2",
     "mysql2": "^3.11.0",
     "pg": "^8.12.0",
     "sqlite3": "^5.1.7",

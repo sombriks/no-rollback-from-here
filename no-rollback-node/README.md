@@ -24,3 +24,6 @@ This is your problem to deal with:
 - Run specially tailored scripts for a specific database engine.
 
 But boy it's fast!
+
+## Usage
+
