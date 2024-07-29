@@ -20,5 +20,5 @@ jobs:
       - name: Run tests
         run: |
           npm ci
-          npm test:coverage
+          npm run test:coverage
         

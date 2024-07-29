@@ -1,6 +1,7 @@
 # [no-rollback-from-here][repo]
 
 [![Java CI](https://github.com/sombriks/no-rollback-from-here/actions/workflows/java.yml/badge.svg)](https://github.com/sombriks/no-rollback-from-here/actions/workflows/java.yml)
+[![Node CI](https://github.com/sombriks/no-rollback-from-here/actions/workflows/node.yml/badge.svg)](https://github.com/sombriks/no-rollback-from-here/actions/workflows/node.yml)
 
 [i felt challenged][origin].
 
