@@ -27,6 +27,15 @@ This is your problem to deal with:
 
 But boy it's fast!
 
+## Supported RDMS
+
+- [X] H2 (surprise!)
+- [X] Postgresql
+- [X] MySQL
+- [ ] MSSQL 
+- [ ] Oracle
+- [ ] DB2
+
 ## Installing
 
 Bld:
@@ -69,9 +78,18 @@ See [tests][tests] and [example project][example] for more examples.
 
 ## Noteworthy
 
-- db2 and oracle can be tricky.
-- i was temped to add a logging library but the challenge is to bear zero deps.
-- bld is cool but i had to customize the project because this weird layout.
+- The h2 database is the only one not depending on testcontainers.
+- Big tech engines like db2, mssql and oracle can be tricky. They shouldn't, any
+  software architect will choose anything else if they can't easily attest the
+  engine capabilities.
+- I was temped to add a logging library but the challenge is to bear zero deps.
+- ~~Bld is cool but i had to customize the project because this weird layout~~.
+  Ok skill issue, fixed, bld is fantastic.
+- Publish maven packages on github is dead simple, just have the proper
+  authentication credentials and you're good. The docs should have a TL;DR; with
+  just that.
+- Consume the package, however, will demand similar setup, people not acquainted
+  with private repos might get trouble on that part.
 
 ## Roadmap
 

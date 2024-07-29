@@ -8,10 +8,14 @@ import {readFileSync} from "node:fs";
  */
 export const NoRollback = (con) => {
 
-  const results = {}
+  const donePrevious = {}
+  const success = {}
+  const failed = {}
 
   return {
-    results,
+    donePrevious,
+    success,
+    failed,
     /**
      * The actual migration operation
      * @param {string[]} changesets list of migration files to read and apply to the database
@@ -48,12 +52,12 @@ export const NoRollback = (con) => {
                   insert into no_rollback_from_here(path)
                   values ($1)
               `, [changeset])
-              results[changeset] = "success"
+              success[changeset] = "success"
             } else {
-              results[changeset] = "already ran"
+              donePrevious[changeset] = "already ran"
             }
           } catch (e) {
-            results[changeset] = e
+            failed[changeset] = e
           }
         }
       } finally {

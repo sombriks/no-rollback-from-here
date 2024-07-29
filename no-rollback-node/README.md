@@ -27,5 +27,24 @@ This is your problem to deal with:
 
 But boy it's fast!
 
-## Usage
+## Supported RDMS
 
+- [ ] SQLite (surprise!)
+- [X] PGLite
+- [ ] Postgresql
+- [ ] MySQL
+- [ ] MSSQL
+- [ ] Oracle
+- [ ] DB2
+
+## Installing
+
+    TODO
+
+## Usage/Examples
+
+    TODO
+
+## Noteworthy
+
+    TODO
