@@ -1,16 +1,22 @@
 {
   "name": "no-rollback-node",
-  "type": "module",
   "version": "0.1.0",
   "description": "Simple, trimmed, node library for database migrations",
+  "keywords": [
+    "database",
+    "migrations"
+  ],
+  "author": "Leonardo Silveira <sombriks@gmail.com>",
+  "license": "MIT",
+  "type": "module",
   "main": "index.js",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "test": "ava",
     "test:coverage": "c8 ava"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "@electric-sql/pglite": "^0.1.5",
     "ava": "^6.1.3",

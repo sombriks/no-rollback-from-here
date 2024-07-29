@@ -25,7 +25,8 @@ jobs:
           key: bld-${{ hashFiles('no-rollback-java/src/bld/java/**') }}
       - if: steps.cache.outputs.cache-hit != 'true'
         run: ./bld clean purge download
-      - run: ./bld compile jacoco
+      - name: Run tests
+        run: ./bld compile jacoco
       - uses: actions/upload-artifact@v4
         with:
           name: coverage.zip
