@@ -2,6 +2,7 @@ declare namespace NoRollbackNode {
 
     type DuckConnection = {
         exec: (statement: string) => Promise<any>;
+        query: (statement: string, params: any[]) => Promise<any>;
     }
 
     type NoRollbackConfig = {
