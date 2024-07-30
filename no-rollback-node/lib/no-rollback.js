@@ -1,5 +1,6 @@
 // @ts-check
-import {readFileSync} from "node:fs";
+import {readFileSync} from "node:fs"
+import {promisify} from "node:util"
 
 /**
  * Provisions a migrator instance
@@ -12,6 +13,10 @@ export const NoRollback = (con) => {
   const success = {}
   const failed = {}
 
+  // hacky time
+  if (!con.query && !!con.run)
+    con.query = promisify(con.run)
+
   return {
     donePrevious,
     success,
@@ -21,40 +26,48 @@ export const NoRollback = (con) => {
      * @param {string[]} changesets list of migration files to read and apply to the database
      */
     async migrate(changesets) {
-      await con.exec(`
+      await con.query(`
         -- store script names already executed
         create table if not exists no_rollback_from_here(
-          created timestamp default now(),
+          created timestamp default current_timestamp,
           path text unique not null,
           primary key (created, path)
         );
+      `, [])
+      await con.query(`
         -- lock while applying migrates to avoid possible concurrent executions
         create table if not exists lock_no_rollback(
           locked integer not null default 1 check (locked = 1),
-          created timestamp default now(),
+          created timestamp default current_timestamp,
           primary key (locked)
         );
-      `)
+      `, [])
 
       try {
-        await con.exec('insert into lock_no_rollback default values;');
+        await con.query(`
+          -- lock table so we avoid concurrent attempts to run migrations
+          insert into lock_no_rollback default values;
+        `, []);
         for await (const changeset of changesets) {
           try {
-            const skip = await con.query(`
-                select created, path
-                from no_rollback_from_here
-                where path = $1
+            const result = await con.query(`
+                -- check if current changeset wasn't already executed
+                select created, path from no_rollback_from_here where path = $1
             `, [changeset])
-            if (skip.rows.length == 0) {
+            // hacky time 2
+            const skip = Array.isArray(result) ? result : Array.isArray(result?.rows) ? result.rows : []
+            if (skip.length == 0) {
               const content = readFileSync(changeset, "utf8")
-              await con.exec(content)
+              // TODO exec could run several statements, query can't
+              await con.query(content, [])
               await con.query(`
-                  insert into no_rollback_from_here(path)
-                  values ($1)
+                -- save applied changeset in metadata
+                insert into no_rollback_from_here(path)
+                values ($1)
               `, [changeset])
               success[changeset] = "success"
             } else {
-              const [{created}] = skip.rows
+              const [{created}] = skip
               donePrevious[changeset] = `already ran at ${created}`
             }
           } catch (e) {
@@ -63,7 +76,10 @@ export const NoRollback = (con) => {
         }
       } finally {
         // always remember to unlock
-        await con.exec('delete from lock_no_rollback;');
+        await con.query(`
+          -- release table lock
+          delete from lock_no_rollback;
+        `, []);
       }
     }
   }

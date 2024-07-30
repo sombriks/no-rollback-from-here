@@ -29,9 +29,9 @@ But boy it's fast!
 
 ## Supported RDMS
 
-- [ ] SQLite (surprise!)
+- [X] SQLite (surprise!)
 - [X] PGLite
-- [ ] Postgresql
+- [X] Postgresql
 - [ ] MySQL
 - [ ] MSSQL
 - [ ] Oracle
@@ -47,4 +47,7 @@ But boy it's fast!
 
 ## Noteworthy
 
-    TODO
+- There is no such thing as jdbc for node. That means we don't have a common API
+  and also needs to deal with different dialects... in prepared statements!
+- Even PostgreSQL and PGLite has differences in api.
+- 
