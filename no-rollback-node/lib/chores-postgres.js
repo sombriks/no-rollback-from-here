@@ -49,7 +49,7 @@ export async function dbCheck(connection, changeset) {
                 -- check if current changeset wasn't already executed
                 select created, path from no_rollback_from_here where path = $1
             `, [changeset])
-  return result.rows ?? []
+  return result?.rows ?? []
 }
 
 export async function dbExec(connection, content) {

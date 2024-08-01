@@ -108,4 +108,4 @@ See [tests][tests] and [example project][example] for more examples.
 Fork and open PRs, willing to receive them :sunglasses:
 
 [tests]: ./src/test/java/norollback/NoRollbackTest.java
-[example]: ../examples/mytodolist/README.md
+[example]: ../examples/mytodolist-java/README.md

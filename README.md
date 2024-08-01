@@ -1,7 +1,13 @@
 # [no-rollback-from-here][repo]
 
+[![MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+
 [![Java CI](https://github.com/sombriks/no-rollback-from-here/actions/workflows/java.yml/badge.svg)](https://github.com/sombriks/no-rollback-from-here/actions/workflows/java.yml)
 [![Node CI](https://github.com/sombriks/no-rollback-from-here/actions/workflows/node.yml/badge.svg)](https://github.com/sombriks/no-rollback-from-here/actions/workflows/node.yml)
+
+[![npm](https://img.shields.io/npm/v/no-rollback-node?style=plastic)](https://www.npmjs.com/no-rollback-node)
+
+## Why
 
 [i felt challenged][origin].
 
@@ -11,7 +17,7 @@
 - [no-rollback-golang][golang]
 - [no-rollback-node][node]
 
-See each project for details
+See individual projects for details
 
 ## Noteworthy
 

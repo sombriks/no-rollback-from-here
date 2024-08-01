@@ -1,0 +1,14 @@
+{
+  "name": "mytodolist-node",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "example",
+  "main": "index.js",
+  "keywords": [],
+  "author": "Leonardo Silveira <sombriks@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "no-rollback-node": "^0.1.0",
+    "sqlite3": "^5.1.7"
+  }
+}

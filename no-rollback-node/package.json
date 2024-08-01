@@ -13,6 +13,13 @@
   "engines": {
     "node": ">=20"
   },
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "url": "https://github.com/sombriks/no-rollback-from-here",
+    "type": "git"
+  },
   "scripts": {
     "test": "ava",
     "test:coverage": "c8 ava"

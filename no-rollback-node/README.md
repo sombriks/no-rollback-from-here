@@ -1,6 +1,7 @@
-# no-rollback-node
+# [no-rollback-node][repo]
 
 [![Node CI](https://github.com/sombriks/no-rollback-from-here/actions/workflows/node.yml/badge.svg)](https://github.com/sombriks/no-rollback-from-here/actions/workflows/node.yml)
+[![npm](https://img.shields.io/npm/v/no-rollback-node?style=plastic)](https://www.npmjs.com/no-rollback-node)
 
 Simple, trimmed, node library for database migrations. It's up to you to do most
 of the job.
@@ -27,27 +28,57 @@ This is your problem to deal with:
 
 But boy it's fast!
 
-## Supported RDMS
+## Installing
+
+```bash
+npm i no-rollback-node
+```
+
+## Usage/Examples
+
+```javascript
+import { NoRollback } from "no-rollback-node"
+
+// build your migrations list. it's your problem.
+const changesets = [
+  "app/configs/migrations/0001-initial-schema.sql",
+  "app/configs/migrations/0002-initial-data.sql",
+  "app/configs/migrations/0003-add-new-column-changeset.sql",
+]
+if(process.env.NODE_ENV == 'test')
+  changesets.push("app/configs/migrations/9999-test-data.sql")
+
+// provision a database connection and please point the engine. no fallback from here
+const migrator = NoRollback({connection:myConnection, dbType: "postgres"})
+
+// showtime
+await migrator.migrate(changesets)
+```
+
+See [tests][tests] and [examples][examples] for details.
+
+## Supported RDMS so far and planned
 
 - [X] SQLite (surprise!)
 - [X] PGLite
 - [X] Postgresql
-- [ ] MySQL
+- [X] MySQL
 - [ ] MSSQL
 - [ ] Oracle
 - [ ] DB2
-
-## Installing
-
-    TODO
-
-## Usage/Examples
-
-    TODO
 
 ## Noteworthy
 
 - There is no such thing as jdbc for node. That means we don't have a common API
   and also needs to deal with different dialects... in prepared statements!
 - Even PostgreSQL and PGLite has differences in api.
-- 
+- MySQL needs special setup in order to allow several statements in a single
+  exec call. consuming projects might not have this configured, so we compromise
+  a little, but the challenge here is to be simple and as little intrusive as
+  possible.
+- Current design can be further improved; database engine specific helps but it
+  can be better.
+
+[repo]: https://github.com/sombriks/no-rollback-from-here
+[tests]: ./test/01-should-just-run.spec.js
+[examples]: ../examples/mytodolist-node/index.js

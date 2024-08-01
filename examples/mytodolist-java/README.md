@@ -9,7 +9,7 @@ simple application showing how to consume the no-rollback library in java projec
 
 ## Setup
 
-Add the github maven repository configuration into your project setup:
+Add the GitHub maven repository configuration into your project setup:
 
 ### bld
 
@@ -51,7 +51,7 @@ public class MytodolistBuild extends Project {
 You need to provide the `GITHUB_ACTOR` and `GITHUB_TOKEN` environment variables
 so you can authenticate with github maven registry and consume packages from it.
 
-Check [this run configuration][config] if you want to easily setup this in a
+Check [this run configuration][config] if you want to easily set up this in a
 .env.local file using intellij.
 
 [config]: ./.idea/runConfigurations/Run%20Build.xml
