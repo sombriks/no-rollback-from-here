@@ -52,6 +52,10 @@ export async function dbCheck(connection, changeset) {
   return result.rows ?? []
 }
 
+export async function dbExec(connection, content) {
+  return await connection.exec(content)
+}
+
 /**
  *
  * @param {DuckConnection} connection

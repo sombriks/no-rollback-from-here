@@ -57,9 +57,14 @@ export async function dbCheck(connection, changeset) {
   return result.rows ?? []
 }
 
+export async function dbExec(connection, content) {
+  return await connection.exec(content)
+}
+
 /**
  *
  * @param {DuckConnection} connection
+ * @param changeset
  */
 export async function dbLedger(connection, changeset) {
   return await connection.query(`

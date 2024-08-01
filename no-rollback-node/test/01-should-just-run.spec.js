@@ -13,6 +13,11 @@ test.before(async (t) => {
   t.context.mysql = await new MySqlContainer("mysql:9.0.1-oraclelinux9").start()
 })
 
+test.after.always(async (t) => {
+  await t.context.pgsql.stop({timeout: 500})
+  await t.context.mysql.stop({timeout: 500})
+})
+
 /**
  * common handle for every supported database engine
  * @param t ava assertions
@@ -55,11 +60,6 @@ const happyPath = async (t, params) => {
     t.is(1, result.rows.length)
   }
 }
-
-test.after.always(async (t) => {
-  await t.context.pgsql.stop({timeout: 500})
-  await t.context.mysql.stop({timeout: 500})
-})
 
 test('should run on PGLite', async t => {
   const connection = new PGlite('memory://test-pgdata', {debug: 0})

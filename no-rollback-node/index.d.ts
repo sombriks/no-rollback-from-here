@@ -13,7 +13,7 @@ declare namespace NoRollbackNode {
     type DuckConnection = {
         exec: (statement: string) => Promise<any>;
         query: (statement: string, params?: any[]) => Promise<any>;
-        all: (statement: string, callback: (err: Error, rows: any[]) => void) => Promise<any>;
+        all?: (statement: string, callback: (err: Error, rows: any[]) => void) => Promise<any>;
     }
 
     /**
@@ -24,12 +24,22 @@ declare namespace NoRollbackNode {
 
     /**
      * the context to pass on to the migrator
+     *
+     * @property {DuckConnection} connection the underlying database connection
+     * @property {DbType} dbType the kind of database we're dealing with. help
+     *                           me to help you.
+     * @property logger a simple logger to track error on the fly instead of
+     *                  check data inside migrator.
      */
     type NoRollbackParams = {
         connection: DuckConnection
         dbType: DbType
+        logger?: any
     }
 
+    /**
+     *
+     */
     type NoRollbackConfig = {
         donePrevious: Record<string, any>
         success: Record<string, any>

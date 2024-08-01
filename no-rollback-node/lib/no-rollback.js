@@ -44,7 +44,7 @@ export const NoRollback = ({connection, dbType, logger}) => {
             if (skip.length === 0) {
               // apply
               const content = readFileSync(changeset, "utf8")
-              await connection.exec(content)
+              await chores[dbType].dbExec(connection, content)
               // save
               await chores[dbType].dbLedger(connection, changeset)
               success[changeset] = "success"
@@ -55,6 +55,7 @@ export const NoRollback = ({connection, dbType, logger}) => {
           } catch (e) {
             failed[changeset] = e
             logger?.error(e)
+            break
           }
         }
       } catch (e) {

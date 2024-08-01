@@ -2,10 +2,13 @@ import {promisify} from "node:util";
 
 export async function hackTime(connection) {
   if (!connection.query) connection.query = promisify(connection.all);
+  // the exec function is callback-style, we need makeup there too
+  // https://github.com/TryGhost/node-sqlite3/wiki/API#execsql--callback
+  connection.promiseExec = promisify(connection.exec);
 }
 
 export async function dbMeta(connection) {
-  return await connection.exec(`
+  return await connection.promiseExec(`
         -- store script names already executed
         create table if not exists no_rollback_from_here(
           created timestamp default current_timestamp,
@@ -22,12 +25,11 @@ export async function dbMeta(connection) {
 }
 
 export async function dbLock(connection) {
-  return await connection.exec(`
+  return await connection.promiseExec(`
           -- lock table so we avoid concurrent attempts to run migrations
           insert into lock_no_rollback (locked) values (1);
         `);
 }
-
 
 export async function dbCheck(connection, changeset) {
   const result = await connection.query(`
@@ -37,6 +39,9 @@ export async function dbCheck(connection, changeset) {
   return result ?? []
 }
 
+export async function dbExec(connection, content) {
+  return await connection.promiseExec(content)
+}
 
 export async function dbLedger(connection, changeset) {
   return await connection.query(`
@@ -46,10 +51,9 @@ export async function dbLedger(connection, changeset) {
               `, [changeset])
 }
 
-
 export async function dbUnlock(connection) {
   // always remember to unlock
-  return await connection.exec(`
+  return await connection.promiseExec(`
           -- release table lock
           delete from lock_no_rollback;
         `);
