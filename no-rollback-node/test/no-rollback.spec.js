@@ -18,15 +18,17 @@ test.after.always(async (t) => {
   await t.context.mysql.stop({timeout: 500});
 })
 
-const happyPath = async (t, connection) => {
+const happyPath = async (t, params) => {
   // given
   const changesets = [
     "test/fixtures/01-happy-path/init.sql"
   ]
 
   // when
-  const migrator = NoRollback(connection)
+  const migrator = NoRollback(params)
   await migrator.migrate(changesets)
+
+  console.log(migrator)
 
   // then
   t.is(1, Object.keys(migrator.success).length)
@@ -34,21 +36,19 @@ const happyPath = async (t, connection) => {
   t.is(0, Object.keys(migrator.donePrevious).length)
 
   // verify if migrate created the table
-  const result = await connection.query(`
-    -- now we attempt to recover new value...
-    insert into xpto (id, foo) values ($1, $2);
-  `, [1, 'test'])
+  await params.connection[params.connection.exec ? 'exec' : 'query'](`
+    -- now we attempt to insert a new value
+    insert into xpto (id, foo) values (1, 'test');
+  `)
 
-  // TODO hacky time 3, sqlite does not have rows and `returning` only works
-  //  with automatic values, so we cant assert much for sqlite
-  if (!connection.run) {
-    t.truthy(result)
-  }
+  const result = params.connection.query(`select * from xpto where id = 1`,[])
+
+  t.truthy(result)
 }
 
 test('should run on PGLite', async t => {
   const connection = new PGlite('memory://test-pgdata', {debug: 0});
-  await happyPath(t, connection)
+  await happyPath(t, {connection, dbType: 'postgres'})
   // await connection.end()
 })
 
@@ -58,17 +58,18 @@ test('should run on PostgreSQL', async t => {
     connectionString: t.context.pgsql.getConnectionUri()
   })
   await connection.connect()
-  await happyPath(t, connection)
+  await happyPath(t, {connection, dbType: 'postgres'})
   await connection.end()
 })
 
 test.skip('should run on MySQL', async t => {
   const connection = await mysql.createConnection(t.context.mysql.getConnectionUri())
-  await happyPath(t, connection)
+  await happyPath(t, {connection, dbType: 'mysql'})
   await connection.end()
 })
 
 test('should run on SQLite', async t => {
-  const connection = new sqlite3.cached.Database(':memory:')
-  await happyPath(t, connection)
+
+  const connection = new sqlite3.verbose().cached.Database(':memory:')
+  await happyPath(t, {connection, dbType: 'sqlite'})
 })
