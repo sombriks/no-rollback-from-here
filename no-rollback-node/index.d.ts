@@ -12,16 +12,19 @@ declare namespace NoRollbackNode {
      */
     type DuckConnection = {
         exec: (statement: string) => Promise<any>;
-        query: (statement: string, params: any[]) => Promise<any>;
+        query: (statement: string, params?: any[]) => Promise<any>;
         all: (statement: string, callback: (err: Error, rows: any[]) => void) => Promise<any>;
     }
 
     /**
-     * we kindly ask the user to tell us what in the name of zombie jesus a we
-     * dealing with.
+     * we kindly ask the developer to tell us what in the name of zombie jesus
+     * are we dealing with.
      */
     type DbType = "postgres" | "sqlite" | "mysql"
 
+    /**
+     * the context to pass on to the migrator
+     */
     type NoRollbackParams = {
         connection: DuckConnection
         dbType: DbType
@@ -34,6 +37,17 @@ declare namespace NoRollbackNode {
         migrate: (changesets: string[]) => Promise<void>
     }
 
-    export function NoRollback(params: NoRollbackParams): NoRollbackConfig
+    /**
+     * Our migrator facade
+     *
+     * @param {NoRollbackParams} params the context so we can start to provision
+     * data access and any other chore that should be transparent to the
+     * developer
+     *
+     * @returns {NoRollbackConfig} The ready-to-run migrator. There is no rollback from here
+     *
+     * @constructor
+     */
+    export type NoRollbackFn = (params: NoRollbackParams) => NoRollbackConfig
 
 }
