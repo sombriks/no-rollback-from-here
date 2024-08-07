@@ -5,7 +5,9 @@
 [![Java CI](https://github.com/sombriks/no-rollback-from-here/actions/workflows/java.yml/badge.svg)](https://github.com/sombriks/no-rollback-from-here/actions/workflows/java.yml)
 [![Node CI](https://github.com/sombriks/no-rollback-from-here/actions/workflows/node.yml/badge.svg)](https://github.com/sombriks/no-rollback-from-here/actions/workflows/node.yml)
 
+[![GitHub Maven Release](https://img.shields.io/github/v/release/sombriks/no-rollback-from-here?label=GitHub%20Maven%20release)](https://github.com/sombriks/no-rollback-from-here/packages/2214778)
 [![npm](https://img.shields.io/npm/v/no-rollback-node?style=plastic)](https://www.npmjs.com/no-rollback-node)
+
 
 ## Why
 
